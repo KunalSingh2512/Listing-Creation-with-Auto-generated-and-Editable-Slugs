@@ -1,0 +1,7 @@
+Expected Behavior
+Pre-fill the auto-generated slug whenever a new listing title is added to the listing creation flow. Allow users to edit the slug while checking for duplicates. If the slug already exists show an error message right below the field in red text (same component as used for social link errors, or duplicate sponsor profile names error for example).
+
+Duplicate the Listing Title field component for style, etc. The slug field should be right below the Listing Title field.
+
+Actual Behavior
+Right now it’s not possible to do this from the frontend.

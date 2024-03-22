@@ -1,0 +1,70 @@
+To achieve the expected behavior described, we'll need to make some modifications to the existing program. Here's a general outline of the changes we need to make:
+
+1. Add a slug field below the listing title field in the listing creation flow.
+2. Pre-fill the slug field with an auto-generated slug based on the listing title.
+3. Allow users to edit the slug field.
+4. Check for duplicate slugs when the user edits the slug field.
+5. Show an error message if the slug already exists.
+
+Here's a hypothetical implementation of these changes in a JavaScript-based frontend application:
+
+// Assuming you have some form component and error handling mechanism in your frontend framework
+
+// Function to generate slug from a given string
+function generateSlug(text) {
+    return text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+}
+
+// Function to check for duplicate slug
+function isDuplicateSlug(slug, existingSlugs) {
+    return existingSlugs.includes(slug);
+}
+
+// Assuming you have a function to display error message in your UI
+function displayErrorMessage(message) {
+    // Display error message in red text below the slug field
+    // You can implement this based on your frontend framework
+}
+
+// Assuming you have a function to clear error message in your UI
+function clearErrorMessage() {
+    // Clear error message below the slug field
+    // You can implement this based on your frontend framework
+}
+
+// Assume you have an event listener for input change on the title field
+titleField.addEventListener('input', () => {
+    // Generate slug from the title
+    const title = titleField.value;
+    const slug = generateSlug(title);
+
+    // Pre-fill the slug field
+    slugField.value = slug;
+
+    // Check for duplicate slug
+    if (isDuplicateSlug(slug, existingSlugs)) {
+        displayErrorMessage('This slug already exists. Please choose a different one.');
+    } else {
+        clearErrorMessage();
+    }
+});
+
+// Assume you have an event listener for input change on the slug field
+slugField.addEventListener('input', () => {
+    // Check for duplicate slug
+    const slug = slugField.value;
+    if (isDuplicateSlug(slug, existingSlugs)) {
+        displayErrorMessage('This slug already exists. Please choose a different one.');
+    } else {
+        clearErrorMessage();
+    }
+});
+
+
+In this code:
+
+1. titleField and slugField represent the input fields for the listing title and slug, respectively.
+2. generateSlug function generates a slug from the given string.
+3. isDuplicateSlug function checks if the given slug already exists in the list of existing slugs.
+4. We attach event listeners to both the title and slug fields to update the slug field when the title changes and to check for duplicate slugs when either field is edited.
+You'll need to adapt this code to fit into your existing frontend framework and integrate it with your existing codebase. Additionally, you'll need to handle the backend logic to actually check for duplicates in the database.
